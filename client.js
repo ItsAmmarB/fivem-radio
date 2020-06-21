@@ -4,16 +4,16 @@ let index = -1;
 let volume = GetProfileSetting(306) / 10;
 let previousVolume = volume;
 
-for (let i = 0, length = GetNumResourceMetadata("radio", "supersede_radio"); i < length; i++) {
-    const radio = GetResourceMetadata("radio", "supersede_radio", i);
-
+for (let i = 0, length = GetNumResourceMetadata(GetCurrentResourceName(), "supersede_radio"); i < length; i++) {
+    const radio = GetResourceMetadata(GetCurrentResourceName(), "supersede_radio", i);
+    console.log(radio)
     if (!availableRadios.includes(radio)) {
         console.error(`radio: ${radio} is an invalid radio.`);
         continue;
     }
 
     try {
-        const data = JSON.parse(GetResourceMetadata("radio", "supersede_radio_extra", i));
+        const data = JSON.parse(GetResourceMetadata(GetCurrentResourceName(), "supersede_radio_extra", i));
         if (data !== null) {
             customRadios.push({
                 "isPlaying": false,
@@ -87,3 +87,5 @@ setTick(() => {
         previousVolume = volume;
     }
 });
+
+ClearCustomRadioTrackList('RADIO_02_POP')
