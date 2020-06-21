@@ -87,5 +87,3 @@ setTick(() => {
         previousVolume = volume;
     }
 });
-
-ClearCustomRadioTrackList('RADIO_02_POP')
